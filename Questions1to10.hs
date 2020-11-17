@@ -38,5 +38,50 @@ myReverse (x : xs) = myReverse xs ++ [x]
 -- Problem 6
 -- Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
 
+-- Solution 1
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome x = x == reverse x
+
+--Solution 2
+isPalindrome' [] = True
+isPalindrome' [_] = True
+isPalindrome' x 
+	| head x == last x = isPalindrome' (init (tail x))
+	| otherwise = False
+
+-- Problem 7
+-- Transform a list, possibly holding lists as elements into a `flat' list by replacing each list with its elements (recursively).
+
+data NestedList a = Elem a | List [NestedList a]
+
+myFlatten (List []) = []
+myFlatten (Elem x) = [x] 
+myFlatten (List (x:xs)) = myFlatten x ++ myFlatten (List xs)
+
+-- Problem 8
+-- If a list contains repeated elements they should be replaced with a single copy of the element. The order of the elements should not be changed.
+
+compress [] = []
+compress [x] = [x]
+compress (x:y:ys)
+	| x == y = compress (y:ys)
+  | otherwise = x:compress(y:ys)
+
+-- Problem 9
+-- Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements they should be placed in separate sublists.
+
+-- Solution 1
+pack x = reverse(packhelper x [] [])
+
+packhelper [] z w = z:w
+packhelper [x] z w = (x:z):w
+packhelper (x:y:ys) z w 
+	| x == y = packhelper (y:ys) (x:z) w
+	| otherwise = packhelper (y:ys) [] ((x:z):w)
+
+--Solution 2
+pack' [] = []
+pack' [x] = [[x]]
+pack' (x:xs) 
+	| elem x (head (pack' xs)) = (x:head (pack' xs)):tail (pack' xs) 
+	| otherwise = [x]:pack' xs
