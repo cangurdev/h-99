@@ -4,4 +4,4 @@ Solutions of Ninety-Nine Haskell Problems from [here](https://wiki.haskell.org/H
 
 ## Solved
 
-**Questions**: 1-9
+**Questions**: 1-9, 14-18
