@@ -14,6 +14,16 @@ repli (x:xs) k = (replicate k x) ++ (repli xs k)
 
 -- Problem 16
 -- Drop every N'th element from a list.
+
+dropEvery :: [a] -> Int -> [a]
+dropEvery [] _ = []
+dropEvery a k = dropHelper a k 1
+
+dropHelper :: [a] -> Int -> Int -> [a]
+dropHelper [] _ _ = []
+dropHelper (x:xs) k j 
+	| j `mod` k == 0 = [] ++ dropHelper xs k (j+1)
+	| otherwise = [x] ++  dropHelper xs k (j+1) 
 	
 -- Problem 17
 -- Split a list into two parts; the length of the first part is given.
@@ -28,4 +38,3 @@ slice :: [a] -> Int -> Int -> [a]
 slice (x:xs) k j
         | k > 2 = slice (xs) (k-1) (j-1)
         | otherwise = take (j-k+1) xs
-
