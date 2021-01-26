@@ -4,4 +4,9 @@ Solutions of Ninety-Nine Haskell Problems from [here](https://wiki.haskell.org/H
 
 ## Solved
 
-**Questions**: 1-9, 14-18
+| Files | Solved Questions |
+| :---:  | :---: |
+| Questions1to10.hs  | 1-9 |
+| Questions11to20.hs | 14-20 |
+| Questions21to28.hs | 21-22 |
+
