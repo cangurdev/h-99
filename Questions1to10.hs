@@ -12,7 +12,9 @@ myLast (_ : xs) = myLast xs
 myButLast :: [x] -> x
 myButLast [] = error "Empty list"
 myButLast [x] = x
-myButLast (x : xs) = if length xs == 1 then x else myButLast xs
+myButLast (x : xs) 
+    | length xs == 1 = x
+    | otherwise = myButLast xs
 
 -- Problem 3
 -- Find the K'th element of a list. The first element in the list is number 1.
@@ -46,8 +48,8 @@ isPalindrome x = x == reverse x
 isPalindrome' [] = True
 isPalindrome' [_] = True
 isPalindrome' x 
-	| head x == last x = isPalindrome' (init (tail x))
-	| otherwise = False
+    | head x == last x = isPalindrome' (init (tail x))
+    | otherwise = False
 
 -- Problem 7
 -- Transform a list, possibly holding lists as elements into a `flat' list by replacing each list with its elements (recursively).
@@ -64,8 +66,8 @@ myFlatten (List (x:xs)) = myFlatten x ++ myFlatten (List xs)
 compress [] = []
 compress [x] = [x]
 compress (x:y:ys)
-	| x == y = compress (y:ys)
-  | otherwise = x:compress(y:ys)
+    | x == y = compress (y:ys)
+    | otherwise = x:compress(y:ys)
 
 -- Problem 9
 -- Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements they should be placed in separate sublists.
@@ -76,12 +78,12 @@ pack x = reverse(packhelper x [] [])
 packhelper [] z w = z:w
 packhelper [x] z w = (x:z):w
 packhelper (x:y:ys) z w 
-	| x == y = packhelper (y:ys) (x:z) w
-	| otherwise = packhelper (y:ys) [] ((x:z):w)
+    | x == y = packhelper (y:ys) (x:z) w
+    | otherwise = packhelper (y:ys) [] ((x:z):w)
 
 --Solution 2
 pack' [] = []
 pack' [x] = [[x]]
 pack' (x:xs) 
-	| elem x (head (pack' xs)) = (x:head (pack' xs)):tail (pack' xs) 
-	| otherwise = [x]:pack' xs
+    | x `elem` head (pack' xs) = (x:head (pack' xs)):tail (pack' xs) 
+    | otherwise = [x]:pack' xs
